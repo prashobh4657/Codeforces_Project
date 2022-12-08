@@ -1,0 +1,41 @@
+{
+    "status": "OK",
+    "result": [
+        {
+            "lastName": "Khodyrev",
+            "country": "Russia",
+            "lastOnlineTimeSeconds": 1623691161,
+            "city": "Moscow",
+            "rating": 1709,
+            "friendOfCount": 91,
+            "titlePhoto": "https://userpic.codeforces.org/1592/title/27e43714e4bea090.jpg",
+            "handle": "DmitriyH",
+            "avatar": "https://userpic.codeforces.org/1592/avatar/7cef566902732053.jpg",
+            "firstName": "Dmitriy",
+            "contribution": 2,
+            "organization": "Yandex",
+            "rank": "expert",
+            "maxRating": 2072,
+            "registrationTimeSeconds": 1268570311,
+            "maxRank": "candidate master"
+        },
+        {
+            "lastName": "Fefer",
+            "country": "Russia",
+            "lastOnlineTimeSeconds": 1636107446,
+            "city": "Saratov",
+            "rating": 2174,
+            "friendOfCount": 372,
+            "titlePhoto": "https://userpic.codeforces.org/242/title/151ab49dee0779f8.jpg",
+            "handle": "Fefer_Ivan",
+            "avatar": "https://userpic.codeforces.org/242/avatar/c4e6a102a9e66281.jpg",
+            "firstName": "Ivan",
+            "contribution": 0,
+            "organization": "Booking.com",
+            "rank": "master",
+            "maxRating": 2476,
+            "registrationTimeSeconds": 1264960450,
+            "maxRank": "grandmaster"
+        }
+    ]
+}
