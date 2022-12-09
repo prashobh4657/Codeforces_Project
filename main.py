@@ -29,13 +29,7 @@ from pandas.core import series
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg,NavigationToolbar2Tk)
 
-profile = open("settings.st","r+")
-username = profile.read() #username will be NONE if user is not logged in
-profile.close()
 
-"""
-Function to logout
-"""
 def logout():
     profile = open("settings.st","w+")
     profile.write("NONE")
@@ -108,7 +102,9 @@ def num_stats():
 Function to get details of user logged in
 """
 
-def GUI(response_text):
+def GUI(cf_username):
+    response = requests.get('https://codeforces.com/api/user.info?handles='+cf_username)
+    response_text = response.text
     data= json.loads(response_text)
     window = tk.Tk()
     width= window.winfo_screenwidth() 
@@ -218,7 +214,6 @@ def GUI(response_text):
     except:
         """"""
 
-    # tk.Button(window, text ="Show rating graph", command = showGraph).place(x=10, y = 600)
     tk.Button(window, text ="Performance by Submissions", command =performance).place(x=500, y = 700)  #750
     tk.Button(window, text ="Performance By Problem Rating", command =num_stats).place(x=825, y = 700) #900
     tk.Button(window, text ="Compare Rating With", command = lambda: compare.compare(username)).place(x=1175, y = 700) #550
@@ -246,19 +241,18 @@ def GUI(response_text):
 END
 """
 
+profile = open("settings.st","r+")
+username = profile.read() #username will be NONE if user is not logged in
+profile.close()
 if(username == "NONE"):
     cf_username = easygui.enterbox("You are not logged in! Please enter your username to log in..","Codeforces Analysis")
     if(cf_username == ""):
         easygui.msgbox("Invalid Username..","Codeforces Analysis")
     else:
-        response = requests.get('https://codeforces.com/api/user.info?handles='+cf_username)
-        response_text = response.text
+        username=cf_username
         profile_write = open("settings.st","w+")
         profile_write.write(cf_username)
-        username = cf_username
         profile_write.close()
-        GUI(response_text)
+        GUI(username)
 else:
-    response = requests.get('https://codeforces.com/api/user.info?handles='+username)
-    response_text = response.text
-    GUI(response_text)
+    GUI(username)
