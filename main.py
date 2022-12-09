@@ -43,9 +43,9 @@ def logout():
     sys.exit()
 
 def showGraph():
-    df1 = pd.read_csv('cf_data.csv')
-    df1.dropna(inplace=True)
-    df1.plot()
+    df = pd.read_csv('cf_data.csv')
+    df.dropna(inplace=True)
+    df.plot()
     plt.title("Rating change")
     plt.show()
 
