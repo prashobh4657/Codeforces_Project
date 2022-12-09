@@ -108,43 +108,34 @@ def num_stats():
 Function to get details of user logged in
 """
 
-def GUI(response):
+def GUI(response_text):
+    data= json.loads(response_text)
     window = tk.Tk()
-
     width= window.winfo_screenwidth() 
     height= window.winfo_screenheight()
-
     window.geometry("%dx%d" % (width, height))
-
     window.title("Codeforces User Data Analysis")
-
     menubar = tk.Menu(window)
     file = tk.Menu(menubar,tearoff=0)
     menubar.add_cascade(label='File',menu=file)
-
     file.add_command(label='Show Graph',command=showGraph)
     file.add_command(label='Log Out',command=logout)
-
     window.config(background='#ffffff',menu=menubar)
 
-    tmp = json.loads(response)
-    rank = tmp['result'][0]['rank']
+    rank = data['result'][0]['rank']
 
     #Get the standings of tags
-
     label = tk.Label(window,text="\n",fg='#000000',bg='#ffffff',font=20)
     label.pack()
 
     label = tk.Label(window,text="Codeforces User Data Analysis",fg='#000000',bg='#ffffff',font="Vardana 24 underline")
     label.pack()
 
-    tmp_text = tmp['result'][0]['firstName']+" "+tmp['result'][0]['lastName']
-
     try:
         tk.Label(window,text = "Username: ",font=14,bg='#ffffff').place(x = 500,y = 160) #40
         if(rank=='pupil'):
             label = tk.Label(window,text=username,fg='#008000',bg='#ffffff',font=20).place(x = 650,y = 160)
-            label.pack()
+            label.pack()    
         elif(rank=='newbie'):
             label = tk.Label(window,text=username,fg='#808080',bg='#ffffff',font=20).place(x = 650,y = 160)
             label.pack()
@@ -171,37 +162,31 @@ def GUI(response):
             label.pack()
     except:
         """"""
-    
     try:
         tk.Label(window,text = "Name: ",font=14,bg='#ffffff').place(x = 500,y = 230)
-        tk.Label(window,text = tmp_text,font=14,bg='#ffffff').place(x = 650,y = 230)
+        tk.Label(window,text = (data['result'][0]['firstName']+" "+data['result'][0]['lastName']),font=14,bg='#ffffff').place(x = 650,y = 230)
     except:
         """"""
-    
     try:
         tk.Label(window,text = "Country: ",font=14,bg='#ffffff').place(x = 500,y = 300)
-        tk.Label(window,text = tmp['result'][0]['country'],font=14,bg='#ffffff').place(x = 650,y = 300)
+        tk.Label(window,text = data['result'][0]['country'],font=14,bg='#ffffff').place(x = 650,y = 300)
     except:
         """"""
-    
     try:
         tk.Label(window,text = "City: ",font=14,bg='#ffffff').place(x = 500,y = 370)
-        tk.Label(window,text = tmp['result'][0]['city'],font=14,bg='#ffffff').place(x = 650,y = 370)
+        tk.Label(window,text = data['result'][0]['city'],font=14,bg='#ffffff').place(x = 650,y = 370)
     except:
         """"""
-    
     try:
         tk.Label(window,text = "Rating: ",font=14,bg='#ffffff').place(x = 500,y = 440)
-        tk.Label(window,text = tmp['result'][0]['rating'],font=14,bg='#ffffff').place(x = 650,y = 440)
+        tk.Label(window,text = data['result'][0]['rating'],font=14,bg='#ffffff').place(x = 650,y = 440)
     except:
         """"""
-
     try:
         tk.Label(window,text = "Contribution: ",font=14,bg='#ffffff').place(x = 500,y = 510)
-        tk.Label(window,text = tmp['result'][0]['contribution'],font=14,bg='#ffffff').place(x = 650,y = 510)
+        tk.Label(window,text = data['result'][0]['contribution'],font=14,bg='#ffffff').place(x = 650,y = 510)
     except:
         """"""
-
     try:
         all_contests_given = requests.get('https://codeforces.com/api/user.rating?handle='+username)
         json_all_contests_given = json.loads(all_contests_given.text)
