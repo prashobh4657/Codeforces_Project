@@ -27,8 +27,7 @@ import os
 import matplotlib.pyplot as plt
 from pandas.core import series
 from matplotlib.figure import Figure
-from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, 
-NavigationToolbar2Tk)
+from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg,NavigationToolbar2Tk)
 
 profile = open("settings.st","r+")
 username = profile.read() #username will be NONE if user is not logged in
@@ -108,7 +107,8 @@ def num_stats():
 """
 Function to get details of user logged in
 """
-def get_details(response):
+
+def GUI(response):
     window = tk.Tk()
 
     width= window.winfo_screenwidth() 
@@ -272,8 +272,8 @@ if(username == "NONE"):
         profile_write.write(cf_username)
         username = cf_username
         profile_write.close()
-        get_details(response_text)
+        GUI(response_text)
 else:
     response = requests.get('https://codeforces.com/api/user.info?handles='+username)
     response_text = response.text
-    get_details(response_text)
+    GUI(response_text)
